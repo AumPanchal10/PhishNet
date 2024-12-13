@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-Phishing Software</title>
+    <script>
+        async function checkURL() {
+            const url = document.getElementById("urlInput").value;
+            const response = await fetch('/analyze', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ url: url })
+            });
+            const data = await response.json();
+            alert(data.is_phishing ? "Phishing detected!" : "URL is safe.");
+        }
+    </script>
+</head>
+<body>
+    <h1>Check for Phishing URLs</h1>
+    <input type="text" id="urlInput" placeholder="Enter URL">
+    <button onclick="checkURL()">Check</button>
+</body>
+</html>
